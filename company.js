@@ -4,10 +4,10 @@ define(['jquery'], function($){
 			var settings = {
 				obj:'#company',
 				liClass:'',
-		        company2IputClass:'',
-		        company2LabelClass:''
+				company2IputClass:'',
+				company2LabelClass:''
 			};
-			$.extend(settings,options);
+			$.extend(settings,options);//覆盖基础配置	
 			var $company = $(settings.obj);
 			var $tip =$('<div class="tip2">请输入列表中公司或其他</div>');
 			var $companyList = $('<ul id="company_list"><li class="other '+settings.liClass+'" data-id="0" style="">其他</li></ul>');
@@ -52,8 +52,8 @@ define(['jquery'], function($){
 						$.post("user/companyName", {
 							company: companyName
 						}, function(data) {
-							var newData = data.replace(/\s/g, '');
-							if (newData == "success") {
+							var newData = data.replace(/\s/g, '');//返回值带有换行		
+						if (newData == "success") {
 							}else{
 								$tip.show();
 							
@@ -64,9 +64,7 @@ define(['jquery'], function($){
 							
 						
 					
-				}.bind(this), 100);//???????
-
-
+				}.bind(this), 100);//点击事件与失去焦点事件冲突			
 			});
 			$companyList.on('click', 'li', function() {
 				// console.log($(this).data('id'));
